@@ -21,14 +21,14 @@ Usage
 
 Example implementation:
 
-<?php
-$uclassify = new uClassify();
+	<?php
+	$uclassify = new uClassify();
 
-$uclassify->setReadApiKey(READ_API_KEY);
-$uclassify->setWriteApiKey(WRITE_API_KEY);
+	$uclassify->setReadApiKey(READ_API_KEY);
+	$uclassify->setWriteApiKey(WRITE_API_KEY);
 
-// Classification from own of public classifiers
-$uclassify->classify('Text that needs to be classified', 'Name of the classifier', (optional)'username_under_which_classifier_exists');
-$uclassify->classifyMany(array('Text that needs to be classified','Text that needs to be classified','Text that needs to be classified'), 'Name of the classifier', (optional)'username_under_which_classifier_exists');
+	// Classification from own of public classifiers
+	$uclassify->classify('Text that needs to be classified', 'Name of the classifier', (optional)'username_under_which_classifier_exists');
+	$uclassify->classifyMany(array('Text that needs to be classified','Text that needs to be classified','Text that needs to be classified'), 'Name of the classifier', (optional)'username_under_which_classifier_exists');
 
-?>
+	?>
