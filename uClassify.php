@@ -1,5 +1,7 @@
 <?php
 
+if(!class_exist('SimpleXMLElement')) throw new uClassifyException("uClassify PHP SDK, requires SimpleXMLElement class to work properly.");
+
 /**
  *	PHP Library for accessing the XML API of uClassify
  *
@@ -549,7 +551,7 @@ class uClassify {
 	 *
 	 *	@param $xmlRequest XML String that needs to be sent as the request
 	 **/
-	private function postCURLRequest($xmlRequest) {
+	protected function postCURLRequest($xmlRequest) {
 		if(!function_exists('curl_init')) throw new uClassifyException('cURL is not installed on your server, and allow_url_fopen is also not enabled on your php.ini settings. ');
 		
 		$headers = array('Content-Type: text/xml');
@@ -574,7 +576,7 @@ class uClassify {
 	 *
 	 *	@param $xmlRequest XML String that needs to be sent as the request
 	 **/
-	private function postFileStreamRequest($xmlRequest) {
+	protected function postFileStreamRequest($xmlRequest) {
 		$params = array('http' => array(
 								   'method' => 'POST',
 								   'header' => 'Content-Type: text/xml; charset=utf-8',
@@ -594,7 +596,7 @@ class uClassify {
 	 *
 	 *	@param $xmlResponse	XML String returned as the response from the server
 	 **/
-	private function parseClassifyResponse($xmlResponse) {
+	protected function parseClassifyResponse($xmlResponse) {
 		$xmlResp = new SimpleXMLElement($xmlResponse);
 		
 		if($xmlResp->status['success'] == "false") {
@@ -606,10 +608,10 @@ class uClassify {
 		foreach($xmlResp->readCalls->classify as $readCalls) {
 			$ClassificationClass = array();
 			foreach($readCalls->classification->{'class'} as $classes) {
-				$ClassificationClass[] = array('class' => $classes['className'], 'p' => $classes['p']);
+				$ClassificationClass[] = array('class' => (string)$classes['className'], 'p' => (string)$classes['p']);
 			}
 			// Since the classification Ids are randomly generated during the call, we also add the text to the response array, as it would be easy for the user to see the response as the text given as input -- Any brigther ideas?
-			$responeArray[] = array('id' => $readCalls['id'], 'classification' => $ClassificationClass, 'text' => base64_decode($this->texts[$_counter])); 
+			$responeArray[] = array('id' => (string)$readCalls['id'], 'classification' => $ClassificationClass, 'text' => base64_decode($this->texts[$_counter])); 
 			$_counter++;
 		}
 		
@@ -640,7 +642,6 @@ class uClassify {
 		
 		return $responeArray;
 	}
-
 }
 
 /**
