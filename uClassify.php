@@ -1,6 +1,6 @@
 <?php
 
-if(!class_exist('SimpleXMLElement')) throw new uClassifyException("uClassify PHP SDK, requires SimpleXMLElement class to work properly.");
+if(!class_exists('SimpleXMLElement')) throw new uClassifyException("uClassify PHP SDK, requires SimpleXMLElement class to work properly.");
 
 /**
  *	Copyright 2011 Ashwanth Kumar <ashwanthkumar@googlemail.com>
@@ -80,10 +80,11 @@ class uClassify {
 
 		$this->buildXMLRequest();
 
+		$_id = 0;
 		foreach($texts as $text) {
 			$this->texts[] = base64_encode($text);
 			// Setting the Ids for the text
-			$this->textIds[] = 'Text' . (rand(0,getrandmax()) * time());
+			$this->textIds[] = 'Text' . ($_id++);
 		}
 
 		$texts = $this->xmlRequest->createElement('texts');
@@ -191,11 +192,12 @@ class uClassify {
 		
 		$this->buildXMLRequest();
 		
+		$_id = 0;
 		foreach($texts as $text) {
 			$this->texts[] = base64_encode($text);
 		
 			// Setting the Ids for the text
-			$this->textIds[] = 'TrainText' . (rand(0,getrandmax()) * time());
+			$this->textIds[] = 'TrainText' . ($_id++);
 		}
 
 		$texts = $this->xmlRequest->createElement('texts');
@@ -254,11 +256,12 @@ class uClassify {
 		
 		$this->buildXMLRequest();
 		
+		$_id = 0;
 		foreach($texts as $text) {
 			$this->texts[] = base64_encode($text);
 		
 			// Setting the Ids for the text
-			$this->textIds[] = 'UnTrainText' . (rand(0,getrandmax()) * time());
+			$this->textIds[] = 'UnTrainText' . ($_id++);
 		}
 
 		$texts = $this->xmlRequest->createElement('texts');

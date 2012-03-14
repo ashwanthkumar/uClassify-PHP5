@@ -15,7 +15,7 @@
 		
 		echo "<h1>Read Calls</h1><hr />";
 		echo "<h1>classify</h1>";
-		$resp = $uclassify->classify('Understanding if a text is positive or negative is easy for humans, but a lot harder for computers. We can “read between the lines”, get jokes and identify irony. Computers aren’t quite there yet but the gap is quickly closing in.', 'Sentiment', 'uClassify');
+		$resp = $uclassify->classify('Understanding if a text is positive or negative is easy for humans, but a lot harder for computers. We can "read between the lines", get jokes and identify irony. Computers aren’t quite there yet but the gap is quickly closing in.', 'Sentiment', 'uClassify');
 		echo "<pre>";
 		print_r($resp);
 		echo "</pre>";
