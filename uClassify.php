@@ -556,7 +556,9 @@ class uClassify {
 	 *	@param $xmlRequest	The actual XML string that needs to be sent
 	 **/
 	protected function postRequest($xmlRequest) {
-		if(ini_get('allow_url_fopen')) {
+		// Disabling the fopen based request, somehow that does not seem to pass the headers right.
+		// TODO: Always using cURL for now, need to refactor code here
+		if(ini_get('allow_url_fopen') && false) {
 			// fopen methods will work
 			return $this->postFileStreamRequest($xmlRequest);
 		} else {
